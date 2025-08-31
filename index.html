@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="de" translate="no">
+<head>
+  <!-- Zeichensatz und mobile Optimierung -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seiten swipen</title>
+
+  <style>
+  
+    /* Overlay Styles (wie zuvor) */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .overlay .content {
+      background: white;
+      padding: 1rem;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+  
+    /* === GRUNDSTIL UND RESET === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden; /* verhindert horizontales Scrollen */
+      font-family: Arial, sans-serif;
+    }
+
+    /* === CONTAINER MIT ALLEN SEITEN === */
+html, body { overflow-x: hidden; }
+
+#container {
+  display: flex;
+  /* Entweder width:auto oder calc(100vw * 3) */
+  /*Nötig für volle Bildschirhöhe, sonst nur ca Hälfte*/
+  min-height: 97vh;
+      
+}
+
+.page {
+  flex: 0 0 100vw;
+  padding: 20px;
+  position: relative;
+  /*min-height: 100vh;  Optional, für Sticky Footer */
+}
+}
+
+/* p-Tag: bleibt width:100%, nun aber 100% von 100vw */
+.page p {
+  padding: 60px;
+  width: 100%;
+  word-wrap: break-word;
+  line-height: 1.2;
+
+}
+
+.emo{
+  text-align:center;
+  font-size: 48px;
+  
+}
+
+.haupt {
+  height: auto;
+  font-size: 20px;
+      background: blue;
+      color: #fff;
+  border:0;
+  border-radius: 5px;
+  margin:5px;
+  padding: 20px;
+}
+
+.kl1 {
+  height: auto;
+  font-size: 20px;
+      background: green;
+      color: #fff;
+  border:0;
+  border-radius: 5px;
+  margin:5px;
+  padding: 20px;
+}
+
+    /* === FARBEN JE NACH SEITE === */
+    .page:nth-child(1) { background-color: #f2f2f2; }
+    .page:nth-child(2) { background-color: #e6f7ff; }
+    .page:nth-child(3) { background-color: #fff0f5; }
+    .page:nth-child(4) { background-color: lightgoldenrodyellow; }
+    .page:nth-child(5) { background-color: white; }
+
+
+
+    /* === NAVIGATIONSBUTTONS === */
+    .nav-btn {
+      position: fixed;
+      top: 80%;
+      transform: translateY(-50%);
+      background: blueviolet;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 38px;
+      border-radius: 50%;
+      z-index: 100;
+    }
+
+    #prevBtn { left: 10px; }
+    #nextBtn { right: 10px; }
+    
+.button-container {
+  display: flex;
+  flex-direction: column; /* Buttons werden untereinander angeordnet */
+  align-items: center; /* Buttons werden horizontal zentriert */
+}
+
+    /* Header */
+    header {
+/*      position: fixed;*/
+      top: 0; left: 0; right: 0;
+      height: 60px;            /* feste Höhe */
+      /*background: #4a90e2;
+      color: white;*/
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      z-index: 100;            /* über dem Content */
+    }
+
+    
+          /* Footer */
+    footer {
+      /*position: fixed;
+      top:90%;*/
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 50px;            /* feste Höhe */
+      background: #27ae60;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+
+ 
+    
+
+ 
+
+.zurueck{
+  padding: 10px;
+  font-size: 18px;
+  /*height:50px;*/
+}
+
+  </style>
+</head>
+
+<body>
+ ⇝👋 Basbergschule Hameln 🙂
+  <!-- === DREI SEITEN === -->
+  <div id="container">
+    <section class="page" id="page1">
+      <header>
+      <h1>Hauptseite</h1>
+      </header>
+      <p>Willkommen auf der Hauptseite.</p><br>
+      
+<div class="button-container">
+        <button class="haupt" onclick="showPage(1)">Klasse 1</button>
+        <button class="haupt" onclick="showPage(2)">Klasse 2</button>
+        <button class="haupt" onclick="showPage(3)">Klasse 3</button>
+        <button class="haupt" onclick="showPage(4)">Klasse 4</button>
+</div>
+<br>
+      <p>Wähle deine Klasse.</p>
+    </section>
+
+    <section class="page" id="page2">
+      
+    <header>
+      <h1>Klasse 1</h1>
+      <button class="zurueck" onclick="showPage(0)">Zurück</button>
+    </header>
+
+    <main>
+
+      <p>Inhalte der ersten Klasse.</p><br>
+      
+<div class="button-container">
+      <button class="kl1" onclick="window.open('https://1x1top.vercel.app','_blank')">Externe Seite 1</button>
+      <button class="kl1" onclick="window.open('https://ee10ue.vercel.app','_blank')">Externe Seite 2</button>
+      <button class="kl1" onclick="window.open('https://saxx3s.vercel.app','_blank')">Externe Seite 3</button>
+      <button class="kl1" onclick="window.open('https://example.com','_blank')">Externe Seite 4</button>
+</div>
+</main>
+
+  <footer>
+    <button onclick="document.getElementById('infoOverlay').style.display='flex'">Infos / Impressum</button>
+  </footer>
+ 
+  </section>
+
+<section class="page" id="page3">
+  <header>
+      <h1>Klasse 2</h1>
+      <button class="zurueck" onclick="showPage(0)">Zurück</button>
+  </header>
+
+  <main>
+
+  </main>
+
+  <footer>
+    <button onclick="document.getElementById('infoOverlay').style.display='flex'">Infos / Impressum</button>
+  </footer>
+</section>
+
+<section class="page" id="page3">
+  <header>
+      <h1>Klasse 3</h1>
+      <button class="zurueck" onclick="showPage(0)">Zurück</button>
+  </header>
+
+  <main>
+
+  </main>
+
+  <footer>
+    <button onclick="document.getElementById('infoOverlay').style.display='flex'">Infos / Impressum</button>
+  </footer>
+</section>
+
+<section class="page" id="page3">
+  <header>
+      <h1>Klasse 4</h1>
+      <button class="zurueck" onclick="showPage(0)">Zurück</button>
+  </header>
+
+  <main>
+
+  </main>
+
+  <footer>
+    <button onclick="document.getElementById('infoOverlay').style.display='flex'">Infos / Impressum</button>
+  </footer>
+</section>
+
+<!--Weitere Seiten anfügen, sonst keine Änderung nötig-->
+</div>
+
+  <!-- === BUTTON-NAVIGATION === -->
+  <button id="prevBtn" class="nav-btn">&larr;</button>
+  <button id="nextBtn" class="nav-btn">&rarr;</button>
+
+
+<!-- Overlay für Infos -->  
+<div class="overlay" id="infoOverlay">
+    <div class="content">
+      <h3>Informationen</h3>
+      <p>Hier Hinweise zur Benutzung dieser Seite.</p>
+      <button id="closeInfo">Schließen</button>
+    </div>
+  </div>  
+
+
+
+  <!-- === JAVASCRIPT FÜR SWIPE UND BUTTONS === -->
+  <script>
+    const container = document.getElementById('container');
+    const pages = document.querySelectorAll('.page');
+    let currentPage = 0;
+    const totalPages = pages.length;
+
+    function showPage(index) {
+      if (index < 0) index = 0;
+      if (index >= totalPages) index = totalPages - 1;
+      currentPage = index;
+      container.style.transform = `translateX(-${index * 100}%)`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => showPage(currentPage - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => showPage(currentPage + 1));
+
+    let startX = 0, endX = 0;
+    const threshold = 50;
+
+    container.addEventListener('touchstart', e => startX = e.changedTouches[0].screenX);
+    container.addEventListener('touchend', e => {
+      endX = e.changedTouches[0].screenX;
+      const diffX = endX - startX;
+      if (Math.abs(diffX) > threshold) {
+        diffX < 0 ? showPage(currentPage + 1) : showPage(currentPage - 1);
+      }
+    });
+
+    showPage(0);
+
+  
+    // Info-Overlay öffnen/schließen
+/*    document.getElementById('infoBtn').addEventListener('click', () => {
+      document.getElementById('infoOverlay').style.display = 'flex';
+    });*/
+    document.getElementById('closeInfo').addEventListener('click', () => {
+      document.getElementById('infoOverlay').style.display = 'none';
+    });
+</script>
+
+</body>
+</html>
